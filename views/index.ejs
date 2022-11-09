@@ -1,0 +1,69 @@
+<%- include('./partials/header/head') %>
+
+    <div class="container-fluid" style="background-color: #eee;min-height:100vh">
+        <div class="container">
+            <div class="row py-4">
+                <div class="col-sm-12 col-md-6 col-lg-3 border d-none d-lg-block">
+                    <div class="d-flex justify-content-center align-items-center">
+                        <h3 class="text-primary mt-5 fst-italic">Ad Space</h3>
+                    </div>
+                </div>
+                <div class="col-sm-12 col-md-8 col-lg-6 d-flex justify-content-center align-items-center">
+                    <!-- HTML -->
+                    <video id='hls-example' class="video-js vjs-default-skin" width="650"
+                        style="height: 500px!important;width: 100%!important;" controls>
+                        <source type="application/x-mpegURL" src="https://edge4.bioscopelive.com/hls/anonymous/O_deZbSaftvQVBV96ivmcA/1667763526/colors_bangla_mid/index.m3u8">
+                    </video>
+
+
+                   
+                </div>
+                <div class="col-sm-12 col-md-4 col-lg-3 border p-2 d-none d-lg-block">
+                    <div class="d-flex justify-content-center align-items-center">
+                        <h3 class="text-primary mt-5 fst-italic">Ad Space</h3>
+                    </div>
+                </div>
+            </div>
+
+            <div>
+                <h5>TV Channel</h5>
+
+                <div class="row">
+                    <% if(tv.length == 0){ %> 
+                        <p>No TV Channel</p>
+                    <% }else{ %> 
+                        <% for(let t of tv){ %> 
+                            <div class="col-4 col-md-3 col-lg-2">
+                                <div class="channel-item">
+                                    <a href="/live-tv/<%= t.channel_name %> ">
+                                        <div class="img-block">
+                                            <img src="<%= t.thumbnails ? t.thumbnails : '/images/no_prev.jpg' %> " alt="" class="livetv img-responsive">
+                                        </div>
+        
+                                        <div class="channel-title">
+                                            <h6 class="channel-name"><%= t.channel_name %> </h6>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                        <% } %> 
+                    <% } %> 
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+ <!-- JS code -->
+                    <!-- If you'd like to support IE8 (for Video.js versions prior to v7) -->
+                    <script src="https://vjs.zencdn.net/ie8/ie8-version/videojs-ie8.min.js"></script>
+                    <script
+                        src="https://cdnjs.cloudflare.com/ajax/libs/videojs-contrib-hls/5.14.1/videojs-contrib-hls.js"></script>
+                    <script src="https://vjs.zencdn.net/7.2.3/video.js"></script>
+
+                    <script>
+                        var player = videojs('hls-example');
+                        player.play();
+                    </script>
+    <%- include('./partials/footer') %>

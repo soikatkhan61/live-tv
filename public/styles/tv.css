@@ -1,0 +1,43 @@
+.channel-item{
+    margin-bottom: 8px;
+}
+
+.img-block{
+    background: #fff;
+    border-radius: 16px;
+    min-height: 100px!important;
+}
+
+.livetv{
+    width: 100%;
+    border: 16.5px solid #fff;
+    border-radius: 16px;
+    background: #fff;
+    height: 90px;
+    -webkit-box-shadow: 0px 0px 4px rgba(112, 144, 176, 0.25);
+    box-shadow: 0px 0px 4px rgba(112, 144, 176, 0.25);  
+}
+
+.img-responsive img{
+    display: block;
+    max-width: 100%;
+    height: 100px;
+}
+
+.channel-title{
+    margin-top: 10px;
+    margin-bottom: 0;
+    text-align: center;
+    color: #213438;
+}
+
+.channel-title .channel-name{
+    font-size: 16px;
+}
+
+@media screen and (max-width: 992px){
+    .channel-title .channel-name{
+        font-size: 12px;
+    }
+}
+    

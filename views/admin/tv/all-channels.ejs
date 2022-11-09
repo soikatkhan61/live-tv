@@ -1,0 +1,60 @@
+<%- include('../partials/header.ejs') %>
+    <div class="container-fluid py-3">
+        <div class="container">
+            <h4 class="text-center text-dark fst-italic fw-bold">All Channels</h4>
+            <hr>
+            <div class="my-2 mt-4 d-md-flex justify-content-between">
+                <a href="/admin/tv" class="btn btn-primary text-light">Add new channel</a>
+                <button class="btn btn-dark">Sorted By</button>
+            </div>
+           <div class="table-responsive">
+            <table class="table">
+                <thead class="table-dark">
+                  <tr>
+                    <th scope="col">Thumbnail</th>
+                    <th scope="col">Channel Name</th>
+                    <th scope="col">Category</th>
+                    <th scope="col">Created At</th>
+                    <th scope="col">Paid?</th>
+                    <th scope="col">Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <% if(tv.length == 0){ %> 
+                    <h3>No TV channel</h3>
+                    <a class="text-light" href="/admin/tv/create-channel">Create a tv channel from here</a>
+                  <% }else{ %> 
+                    <% for(let t of tv){ %> 
+                      <tr>
+                        <th><img
+                            src="<%= t.thumbnails ? t.thumbnails : '/images/no_prev.jpg' %>"
+                            class="img-thumbnail"
+                            width="130px"
+                            height="50px"
+                            style="max-height:70px!important"
+                            alt="<%= t.channel_name %> photo"
+                          /></th>
+                        <td class="fw-bold"><%= t.channel_name %></td>
+                        <td><%= t.category %></td>
+                        <td><%= t.createdAt.toDateString() %></td>
+                        <td><span class="badge badge-<%= t.paid === 'Free' ? 'success' : 'primary' %> rounded-pill d-inline"
+                            ><%= t.paid %></span</td>
+                        <td>
+                            <div>
+                                <a class="text-light btn btn-sm btn-warning"  href="/admin/tv/edit-channel?channel_id=<%= t.id %> ">Edit</a> 
+                                <a class="text-light btn btn-sm btn-danger"  onclick="return confirm('Are you sure to Delete?')" href="/admin/tv/delete?channel_id=<%= t.id %> ">Delete</a>
+                            </div>
+                        </td>
+                      </tr>
+                    <% } %> 
+                  <% } %> 
+                  
+                </tbody>
+              </table>
+           </div>
+        </div>
+    </div>
+    <%- include('../partials/footer.ejs') %>
+        </body>
+
+        </html>

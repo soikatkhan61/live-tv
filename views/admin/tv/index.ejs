@@ -1,0 +1,91 @@
+<%- include('../partials/header.ejs') %>
+    <div class="container-fluid py-3" style="background-color: #eeeeee;min-height: 90vh;">
+        <div class="container bg-light p-lg-4 shadow-sm">
+            <h4 class="text-center mb-5 text-dark fst-italic fw-bold">Create a new channel! </h4>
+            <form action="/admin/tv/create-channel" method="post" enctype="multipart/form-data">
+                <div class="form-outline mb-4">
+                    <input type="text" name="channel_name" id="form7Example1" class="form-control" required/>
+                    <label class="form-label" for="form7Example1">Channel Name *</label>
+                  </div>
+
+                <div class="mt-3">
+                    <div class="row d-flex align-items-center">
+                        <div class="col-sm-12 col-md-6">
+                            <input accept="image/*" type="file"  name="thumbnail" class="form-control" id="customFile" required/>
+                        </div>
+                        <div class="col-sm-12 col-md-6">
+                            <img id="blah" class="img thumbnail border"  src="/images/no_prev.jpg" alt="Channel thumbnail" height="100" width="200"/>
+                        </div>
+                    </div>
+                    
+                </div>
+
+                <script>
+                    customFile.onchange = evt => {
+                    const [file] = customFile.files
+                    if (file) {
+                        blah.src = URL.createObjectURL(file)
+                    }
+                    }
+                </script>
+                <div class="form-outline mt-3">
+                    <input type="text" name="m3u8_link" id="form7Example1" class="form-control" required/>
+                    <label class="form-label" for="form7Example1">Channel m3u8 link *</label>
+                  </div>
+
+                <div class="mt-3">
+                    <script>
+                        function update() {
+                            var d = document.getElementById('country');
+                            var dText = d.options[d.selectedIndex].text;
+                            document.getElementById('category').value = dText
+                        }
+                    </script>
+                    <select id="country" class="py-2 px-4" onchange="update();"
+                        style="width: 100%; outline: black">
+                        <option class="py-2 px-5">Channel Category *</option>
+                        <option class="py-2 px-5" value="Ongoing">Sports</option>
+                        <option class="py-2 px-5" value="Completed">Movies</option>
+                        <option class="py-2 px-5" value="Upcoming">News</option>
+                        <option class="py-2 px-5" value="Upcoming">Cartoon</option>
+                    </select>
+                    <input id="category" name="category" value="" class="d-none" >
+                </div>
+
+                <div class="mt-3 d-flex">
+                    <label for="flexCheckDefault">Featured</label>
+                    <input name="featured" class="form-check-input mx-2" type="checkbox" id="flexCheckDefault" />
+
+                    <label for="flexCheckDefault2">From Youtube</label>
+                    <input name="youtube" class="form-check-input mx-2" type="checkbox" id="flexCheckDefault2" />
+                </div>
+
+                <div class="mt-3">
+                    <script>
+                        function update_paid() {
+                            var d = document.getElementById('paid_select');
+                            var dText = d.options[d.selectedIndex].text;
+                            document.getElementById('paid').value = dText
+                        }
+                    </script>
+                    <select id="paid_select" class="py-2 px-4" onchange="update_paid();"
+                        style="width: 100%; outline: black">
+                        <option class="py-2 px-5">Paid?</option>
+                        <option class="py-2 px-5" value="Ongoing">Free</option>
+                        <option class="py-2 px-5" value="Completed">Silver</option>
+                        <option class="py-2 px-5" value="Upcoming">Gold</option>
+                        <option class="py-2 px-5" value="Upcoming">Platinum</option>
+                    </select>
+                    <input id="paid" name="paid" value="" class="d-none" >
+                </div>
+
+                <button type="submit" class="btn btn-primary btn-sm-block mt-5">Create</button>
+
+            </form>
+
+        </div>
+    </div>
+    <%- include('../partials/footer.ejs') %>
+        </body>
+
+        </html>
