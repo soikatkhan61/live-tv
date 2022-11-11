@@ -2,7 +2,7 @@
 <!-- SIDEBAR -->
 <div class="sidebar" style="background-color: #3c4b64;color: white;">
     <div class="sidebar-logo">
-      <h2>Global Crypto</h2>
+      <h2>Live TV</h2>
         <div class="sidebar-close" id="sidebar-close">
             <i class='bx bx-left-arrow-alt'></i>
         </div>
@@ -72,11 +72,24 @@
                 </li>
             </ul>
         </li>
-        <li>
-            <a href="/admin/withdraw-request" >
-                <i class='bx bx-dollar-circle' ></i>
-                <span>withdraw-request</span>
+        <li class="sidebar-submenu">
+            <a href="#" class="sidebar-menu-dropdown">
+                <i class='bx bxs-package'></i>
+                <span>Ad Management</span>
+                <div class="dropdown-icon"></div>
             </a>
+            <ul class="sidebar-menu sidebar-menu-dropdown-content">
+                <li>
+                    <a href="/admin-ad/get-all-ads">
+                        All Ads
+                    </a>
+                </li>
+                <li>
+                    <a href="/admin-ad">
+                        Create Ad
+                    </a>
+                </li>
+            </ul>
         </li>
         <li>
             <a href="/admin/search-user-profile">
@@ -119,7 +132,7 @@
 
     <!-- MAIN CONTENT -->
     <div class="main">
-        <div class="main-header  bg-success text-light">
+        <div class="main-header  text-light" style="background-color: rgb(35, 160, 35);">
             <div class="mobile-toggle" id="mobile-toggle">
                 <i class='bx bx-menu-alt-right'></i>
             </div>

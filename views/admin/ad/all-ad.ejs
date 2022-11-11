@@ -1,0 +1,56 @@
+<%- include('../partials/header.ejs') %>
+    <div class="container-fluid py-3">
+        <div class="container">
+            <div class="table-responsive">
+                <table class="table">
+                    <thead class="table-dark">
+                      <tr>
+                        <th scope="col">Ad Images</th>
+                        <th scope="col">Ad Name</th>
+                        <th scope="col">Ad Price</th>
+                        <th scope="col">Created At</th>
+                        <th scope="col">Payment Status</th>
+                        <th scope="col">Client Number</th>
+                        <th scope="col">Action</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <% if(ads.length == 0){ %> 
+                        <h3 class="text-center text-danger">No Ads</h3>
+                        
+                      <% }else{ %> 
+                        <% for(let t of ads){ %> 
+                          <tr>
+                            <th><img
+                                src="<%= t.ad_image ? t.ad_image : '/images/no_prev.jpg' %>"
+                                class="img-thumbnail"
+                                width="200px"
+                                height="200px"
+                                
+                                alt="<%= t.ad_name %> photo"
+                              /></th>
+                            <td class="fw-bold"><%= t.ad_name %></td>
+                            <td><%= t.ad_price %> TK</td>
+                            <td><%= t.createdAt.toDateString() %></td>
+                            <td><span class="badge badge-<%= t.payment_status === 'Paid' ? 'success' : 'danger' %> rounded-pill d-inline"
+                                ><%= t.payment_status %></span</td>
+                            <td><%= t.providor_num ? t.providor_num : 'Not given' %></td>
+                            <td>
+                                <div>
+                                    <a class="text-light btn btn-sm btn-warning"  href="/admin-ad/edit?ad_id=<%= t.id %> ">Edit</a> 
+                                    <a class="text-light btn btn-sm btn-danger"  onclick="return confirm('Are you sure to Delete?')" href="/admin-ad/delete?ad_id=<%= t.id %> ">Delete</a>
+                                </div>
+                            </td>
+                          </tr>
+                        <% } %> 
+                      <% } %> 
+                      
+                    </tbody>
+                  </table>
+               </div>
+        </div>
+    </div>
+    <%- include('../partials/footer.ejs') %>
+        </body>
+
+        </html>

@@ -93,3 +93,17 @@ CREATE TABLE IF NOT EXISTS tv (
     updatedAt TIMESTAMP(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
     createdAt TIMESTAMP(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6)
 );
+
+
+CREATE TABLE IF NOT EXISTS ad (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    ad_name varchar(255) not null,
+    ad_link varchar(255),
+    ad_price varchar(10) DEFAULT 0,
+    payment_status enum("Paid","Due") DEFAULT "Due",
+    validity int(3) not null,
+    providor_num varchar(15),
+    ad_image varchar(300) not null,
+    updatedAt TIMESTAMP(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
+    createdAt TIMESTAMP(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6)
+);

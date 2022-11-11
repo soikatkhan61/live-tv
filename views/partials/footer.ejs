@@ -1,5 +1,37 @@
 <!-- MDB -->
+
 <script
   type="text/javascript"
   src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/4.3.0/mdb.min.js"
 ></script>
+<script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
+<script>
+  
+  function startSwipe(){
+    var swiper = new Swiper(".mySwiper", {
+    effect: "cubeEffect",
+    grabCursor: true,
+    centeredSlides: true,
+    slidesPerView: "auto",
+    autoplay:{
+      delay: 5000,
+      disableOnInteraction: false,
+    },
+    cubeEffect: {
+          shadow: true,
+          slideShadows: true,
+          shadowOffset: 20,
+          shadowScale: 0.94,
+        },
+  });
+  }
+
+  let adBox = document.querySelectorAll('.ad')
+
+  setTimeout( function() {
+    adBox.forEach(v=>{
+    v.style.display = 'block'
+    startSwipe()
+  })
+     }, 5000);
+</script>

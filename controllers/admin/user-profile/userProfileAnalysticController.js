@@ -8,14 +8,14 @@ exports.profileSearchAndGetController = (req,res,next) =>{
                 return next(e)
             }else{
                 if(results){
-                    res.render("admin/pages/user-profile/profile-search",{searchResult:results})
+                    res.render("admin/pages/user-profile/profile-search",{flashMessage:'',searchResult:results})
                 }else{
-                    res.render("admin/pages/user-profile/profile-search",{searchResult:''})
+                    res.render("admin/pages/user-profile/profile-search",{flashMessage:'',searchResult:''})
                 }
             }
         })
     }else{
-        res.render("admin/pages/user-profile/profile-search",{searchResult:''})
+        res.render("admin/pages/user-profile/profile-search",{flashMessage:'',searchResult:''})
     }
     
     

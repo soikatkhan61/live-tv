@@ -1,4 +1,6 @@
 const db = require("../../../config/db.config")
+const fs = require('fs');
+const Flash = require("../../../utils/Flash");
 
 exports.renderTvController = (req,res,next) =>{
     res.render("admin/tv",{title:'TV Panel',flashMessage:''})
@@ -58,7 +60,7 @@ exports.editChannelGetController = (req,res,next) =>{
                 next(e)
             }else{
                 if(data.length>0){
-                    res.render('admin/tv/edit-channel',{flashMessage:'',title:'Edit channel',channel:data[0]})
+                    res.render('admin/tv/edit-channel',{flashMessage: Flash.getMessage(req),title:'Edit channel',channel:data[0]})
                 }else{
                     res.send("not found any channel")
                 }
@@ -69,18 +71,50 @@ exports.editChannelGetController = (req,res,next) =>{
     }
 }
 exports.editChannelPostController = (req,res,next) =>{
-    let {channel_id,channel_name,m3u8_link} = req.body
-    console.log(req.body.thumbnail)
-    console.log(req.body)
-    return
+    let {channel_id,channel_name,m3u8_link,category,featured,youtube,paid,thumbnail} = req.body
     try {
-        db.query("update tv set channel_name = ? ,link = ? where id = ? ",[channel_name,m3u8_link,channel_id],(e,data)=>{
+        db.query("select * from tv where id = ? limit 1",[channel_id],(e,data)=>{
             if(e){
                 next(e)
             }else{
-                res.redirect(`/admin/tv/edit-channel?channel_id=${channel_id}`)
+                if(data.length>0){
+                    if(req.file){
+                        console.log(req.file.path)
+                        console.log("." + data[0].thumbnails)
+                        let path = "public" + data[0].thumbnails
+                        fs.unlink(path, function (err) {
+                            if (err && err.code == "ENOENT") {
+                            // file doens't exist
+                            console.info("File doesn't exist, won't remove it.");
+                            } else if (err) {
+                            // other errors, e.g. maybe we don't have enough permission
+                            console.error("Error occurred while trying to remove file");
+                            } else {
+                            console.info(`removed`);
+                            }
+                        });
+                        thumbnail = `/uploads/${req.file.filename}`
+                    }else{
+                        thumbnail = data[0].thumbnails
+                    }
+
+                    db.query("update tv set channel_name = ? ,link = ?,thumbnails = ?,category=?,featured=?,youtube=?,paid=? where id = ? ",[channel_name,m3u8_link,thumbnail,category,featured,youtube,paid,channel_id],(e,data)=>{
+                        if(e){
+                            next(e)
+                        }else{
+                            req.flash("success", "Successfully updated");
+                            res.redirect(`/admin/tv/edit-channel?channel_id=${channel_id}`)
+                        }
+                    })
+                }else{
+                    res.send("No data found")
+                }
+               
+                
             }
         })
+
+        
     } catch (error) {
         next(error)
     }

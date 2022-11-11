@@ -1,4 +1,5 @@
 const db = require("../../config/db.config")
+const Flash = require("../../utils/Flash");
 exports.adminDashboardGetController =async (req,res,next) =>{
 
     try {
@@ -6,7 +7,7 @@ exports.adminDashboardGetController =async (req,res,next) =>{
             if(e){
                 return next(e)
             }else{
-                res.render("admin/dashboard",{recentUser:data[0],pkg:data[1],totalUser:data[2],totalPkgSell:data[3]})
+                res.render("admin/dashboard",{flashMessage:Flash.getMessage(req),recentUser:data[0],pkg:data[1],totalUser:data[2],totalPkgSell:data[3]})
             }
         })
         
@@ -24,7 +25,7 @@ exports.packageAnalysticGetController =async (req,res,next) =>{
             }
             console.log(data)
             if(data){
-                res.render("admin/pages/package/analystic",{pkg:data})
+                res.render("admin/pages/package/analystic",{flashMessage:'',pkg:data})
             }else{
                 res.status(200).send("no data found")
             }

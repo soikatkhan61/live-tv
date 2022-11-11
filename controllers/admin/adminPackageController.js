@@ -9,6 +9,7 @@ exports.adminPackageGetController = async (req, res, next) => {
     }
     if (data) {
       res.render("admin/pages/package/package", {
+        flashMessage:'',
         pkg: data,
       });
     } else {
@@ -34,6 +35,7 @@ exports.packageEditGetController = async (req, res, next) => {
           });
         } else {
           res.render("admin/pages/package/edit-package", {
+            flashMessage:'',
             pkg: data[0],
             pkgs: data[1],
           });
@@ -108,6 +110,7 @@ exports.pkgApproveGet = async (req, res, next) => {
         } else {
           if (data) {
             res.render("admin/pages/package/pkg_buy_req", {
+              flashMessage:'',
               title: "Pakcage Request",
               pkg: data,
             });
@@ -367,6 +370,7 @@ exports.viewUplineGetController = async (req, res, next) => {
                                           res.render(
                                             "admin/pages/package/view-up-line",
                                             {
+                                              flashMessage:'',
                                               level1,
                                               level2,
                                               level3,
@@ -377,6 +381,7 @@ exports.viewUplineGetController = async (req, res, next) => {
                                           res.render(
                                             "admin/pages/package/view-up-line",
                                             {
+                                              flashMessage:'',
                                               level1,
                                               level2,
                                               level3: "",
@@ -389,6 +394,7 @@ exports.viewUplineGetController = async (req, res, next) => {
                                   );
                                 } else {
                                   res.render("admin/pages/package/view-up-line", {
+                                    flashMessage:'',
                                     level1,
                                     level2: "",
                                     level3: "",

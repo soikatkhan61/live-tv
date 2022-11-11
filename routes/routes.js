@@ -1,10 +1,10 @@
 const authRoute = require("./authRoute")
 const userRoute = require("./userRoute")
 const adminRoute = require("./adminRoute")
-const taskRoute = require("./taskRoute")
 const packageRoute = require("./packageRoute")
 const profileRoute = require("./profileRoute")
 const HomeRoute = require("./HomeRoute")
+const adRoute = require("./adRoute")
 const liveTVRoute = require("./liveTVRoute")
 const pg = require("./pg")
 
@@ -26,10 +26,6 @@ const routes = [
         handler: userRoute
     },
     {
-        path: "/task",
-        handler: taskRoute
-    },
-    {
         path: "/packages",
         handler: packageRoute
     },
@@ -44,6 +40,10 @@ const routes = [
     {
         path: "/search",
         handler: searchResult
+    },
+    {
+        path: "/admin-ad",
+        handler: adRoute
     },
     {
         path: "/live-tv",
