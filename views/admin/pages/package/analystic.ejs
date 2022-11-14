@@ -9,7 +9,7 @@
               <tr>
                 <th scope="col">Package Name</th>
                 <th scope="col">Price</th>
-                <th scope="col">Comission</th>
+                <th scope="col">Validity</th>
                 <th scope="col">Total Subscriber</th>
                 <th scope="col">Created At</th>
                 <th scope="col">Action</th>
@@ -19,8 +19,8 @@
                 <% for(let p of pkg){ %> 
                     <tr>
                         <td><%= p.package_name%></td>
-                        <td>$<%= p.price%></td>
-                        <td><%= p.package_comission%> %</td>
+                        <td><%= p.price%> TK</td>
+                        <td><%= p.package_comission%> Month</td>
                         <td><%= p.total_subscriber%> </td>
                         <td><%= p.createdAt.toDateString() %></td>
                         <td><a href="/admin/packages/edit-package?package=<%= p.package_name %>" class="btn btn-sm btn-warning" >edit</a></td>

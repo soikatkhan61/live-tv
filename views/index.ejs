@@ -1,45 +1,25 @@
 <%- include('./partials/header/head') %>
 
-    <div class="container-fluid py-md-4 shadow-sm" style="background-color:rgb(236, 234, 234);min-height:100vh">
-        <div class="container pb-4 rounded" style="background-color: white;">
+    <div class="container-fluid py-md-4 shadow-sm" style="background-color:#F2F4F8 ;min-height:100vh">
+        <div class="container pb-4 rounded" >
             <div class="row p-3">
                 <div class="col-sm-12 col-md-6 col-lg-3 border d-none d-lg-block">
                     <div class="ad">
                         <p class="text-center pb-0 mt-1 fw-bold">Sponsored</p>
                         <div class="swiper mySwiper">
                             <div class="swiper-wrapper">
-                              <div class="swiper-slide">
-                                <img src="https://swiperjs.com/demos/images/nature-1.jpg" />
-                              </div>
-                              <div class="swiper-slide">
-                                <img src="https://swiperjs.com/demos/images/nature-2.jpg" />
-                              </div>
-                              <div class="swiper-slide">
-                                <img src="https://swiperjs.com/demos/images/nature-3.jpg" />
-                              </div>
-                              <div class="swiper-slide">
-                                <img src="https://swiperjs.com/demos/images/nature-4.jpg" />
-                              </div>
-                              <div class="swiper-slide">
-                                <img src="https://swiperjs.com/demos/images/nature-5.jpg" />
-                              </div>
-                              <div class="swiper-slide">
-                                <img src="https://swiperjs.com/demos/images/nature-6.jpg" />
-                              </div>
-                              <div class="swiper-slide">
-                                <img src="https://swiperjs.com/demos/images/nature-7.jpg" />
-                              </div>
-                              <div class="swiper-slide">
-                                <img src="https://swiperjs.com/demos/images/nature-8.jpg" />
-                              </div>
-                              <div class="swiper-slide">
-                                <img src="https://swiperjs.com/demos/images/nature-9.jpg" />
-                              </div>
+                              <% if(ad.length > 0){ %>
+                                <% for(a of ad){ %>
+                                  <div class="swiper-slide">
+                                    <img src="<%= a.ad_image %> " />
+                                  </div> 
+                                <% } %> 
+                              <% } %> 
                             </div>
                             <div class="swiper-pagination"></div>
                           </div>
                           <div class="d-flex justify-content-center">
-                            <a href="#" class="btn border">Contact For Ad</a>
+                            <a href="/contact" class="btn border">Contact For Ad</a>
                           </div>
                     </div>
                 </div>
@@ -49,48 +29,25 @@
                         style="height: 500px!important;width: 100%!important;" controls>
                         <source type="application/x-mpegURL" src="https://edge4.bioscopelive.com/hls/anonymous/O_deZbSaftvQVBV96ivmcA/1667763526/colors_bangla_mid/index.m3u8">
                     </video>
-
-
-                   
                 </div>
                 <div class="col-sm-12 col-md-4 col-lg-3 border p-2 d-none d-lg-block">
                     <div class="ad">
                         <p class="text-center pb-0 mt-1 fw-bold">Sponsored</p>
                         <div class="swiper mySwiper">
                             <div class="swiper-wrapper">
-                              <div class="swiper-slide">
-                                <img src="https://swiperjs.com/demos/images/nature-1.jpg" />
-                              </div>
-                              <div class="swiper-slide">
-                                <img src="https://swiperjs.com/demos/images/nature-2.jpg" />
-                              </div>
-                              <div class="swiper-slide">
-                                <img src="https://swiperjs.com/demos/images/nature-3.jpg" />
-                              </div>
-                              <div class="swiper-slide">
-                                <img src="https://swiperjs.com/demos/images/nature-4.jpg" />
-                              </div>
-                              <div class="swiper-slide">
-                                <img src="https://swiperjs.com/demos/images/nature-5.jpg" />
-                              </div>
-                              <div class="swiper-slide">
-                                <img src="https://swiperjs.com/demos/images/nature-6.jpg" />
-                              </div>
-                              <div class="swiper-slide">
-                                <img src="https://swiperjs.com/demos/images/nature-7.jpg" />
-                              </div>
-                              <div class="swiper-slide">
-                                <img src="https://swiperjs.com/demos/images/nature-8.jpg" />
-                              </div>
-                              <div class="swiper-slide">
-                                <img src="https://swiperjs.com/demos/images/nature-9.jpg" />
-                              </div>
+                              <% if(ad.length > 0){ %>
+                                <% for(a of ad){ %>
+                                  <div class="swiper-slide">
+                                    <img src="<%= a.ad_image %> " />
+                                  </div> 
+                                <% } %> 
+                              <% } %> 
                             </div>
                             <div class="swiper-pagination"></div>
                           </div>
 
                           <div class="d-flex justify-content-center">
-                            <a href="#" class="btn">Contact For Ad</a>
+                            <a href="/contact" class="btn">Contact For Ad</a>
                           </div>
                     </div>
                 </div>
@@ -104,22 +61,73 @@
                         <p>No TV Channel</p>
                     <% }else{ %> 
                         <% for(let t of tv){ %> 
-                            <div class="col-4 col-md-3 col-lg-2">
-                                <div class="channel-item">
-                                    <a href="/live-tv/<%= t.channel_name %> ">
-                                        <div class="img-block">
-                                            <img src="<%= t.thumbnails ? t.thumbnails : '/images/no_prev.jpg' %> " alt="" class="livetv img-responsive">
+                          <div class="col-4 col-md-3 col-lg-2">
+                            <div class="content-grid-block">
+                              <div class="content-item-container">
+                                <div class="item">
+                                    <a href="/live-tv/<%= t.slug %> ">
+                                        <div class="image-wrapper">
+                                          <div class="content-badge live-tv">
+                                            <span class="prime <%= t.paid == 'Free' ? 'd-none' : '' %>">prime</span>
+                                          </div>
+  
+                                          <div class="image-block">
+                                            <img src="<%= t.thumbnails ? t.thumbnails : '/images/no_prev.jpg' %> " class="img-responsive b-lazy img-livetv b-loaded" alt="">
+                                          </div>
                                         </div>
         
-                                        <div class="channel-title">
-                                            <h6 class="channel-name"><%= t.channel_name %> </h6>
+                                        <div class="channel-title-block mt-2">
+                                            <h5 class="content-title single-line-clamp text-dark"><%= t.channel_name %> </h5>
                                         </div>
                                     </a>
                                 </div>
                             </div>
+                             </div>
+                          </div>
+                          
                         <% } %> 
                     <% } %> 
                 </div>
+            </div>
+
+            <div class="tv-card mt-3">
+              <% if(cat.length == 0){ %> 
+                <h5>No Category</h5>
+              <% }else{ %> 
+                <% for (let c of cat){ %> 
+                  <h5><%= c %> </h5>
+                  <hr>
+                  <div class="row">
+                  <% for (let t of tv){ %> 
+                   <% if(t.category === c){ %> 
+                    <div class="col-4 col-md-3 col-lg-2">
+                      <div class="content-grid-block">
+                        <div class="content-item-container">
+                          <div class="item">
+                              <a href="/live-tv/<%= t.slug %> ">
+                                  <div class="image-wrapper">
+                                    <div class="content-badge live-tv">
+                                      <span class="prime <%= t.paid == 'Free' ? 'd-none' : '' %> ">prime</span>
+                                    </div>
+
+                                    <div class="image-block">
+                                      <img src="<%= t.thumbnails ? t.thumbnails : '/images/no_prev.jpg' %> " class="img-responsive b-lazy img-livetv b-loaded" alt="">
+                                    </div>
+                                  </div>
+  
+                                  <div class="channel-title-block mt-2">
+                                      <h5 class="content-title single-line-clamp text-dark"><%= t.channel_name %> </h5>
+                                  </div>
+                              </a>
+                          </div>
+                      </div>
+                       </div>
+                    </div>
+                   <% } %> 
+                  <% } %> 
+                </div>
+                <% }%> 
+              <% }%> 
             </div>
         </div>
     </div>

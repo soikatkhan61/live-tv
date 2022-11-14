@@ -10,7 +10,6 @@ exports.bindUserWithRequest = () =>{
         if(!req.session.isLoggedIn){
             return next()
         }
-
         try{
             let user
             jwt.verify(req.session.token, process.env.JWT_SECRET_KEY, function(err, decoded) {
@@ -30,10 +29,8 @@ exports.bindUserWithRequest = () =>{
             console.log(e)
             next(e)
         }
-
     }
 }
-
 
 exports.isAuthenticated = (req,res,next) =>{
     
@@ -59,7 +56,6 @@ exports.isUnAuthenticated = (req,res,next) => {
 }
 
 exports.checkAdmin = async(req,res,next) => {
-    
     if(req.user != undefined){
         try{
             db.query("select * from users where id=? LIMIT 1",[req.user.id],(e,user)=>{
@@ -69,6 +65,24 @@ exports.checkAdmin = async(req,res,next) => {
                     }else{
                         res.send("you are not admin")
                     }
+                }
+            })  
+        }catch(e){
+            console.log(e)
+            next(e)
+        }
+    }
+}
+
+exports.isSubscriber = async(req,res,next) => {
+    
+    if(req.user != undefined){
+        try{
+            db.query("select user_id from pkg_subscriber where user_id = ?",[req.user.id],(e,user)=>{
+                if(user.length > 0 ){
+                    return next()
+                }else{
+                    res.send("you need to buy package")
                 }
             })
             

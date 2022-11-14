@@ -4,21 +4,12 @@ const mongoose = require("mongoose")
 const path = require("path")
 require('./config/db.config')
 
-//import code
-const {homePageGetController} = require("./controllers/myController")
 
 //import middleware
 const setMiddleware = require("./middleware/middleware")
 //import route
 const setRoutes = require("./routes/routes")
 
-//mongodb+srv://admin:admin@cluster0.ljfyxtq.mongodb.net/test
-let MONGODB_URI
-if(true){
- MONGODB_URI =`mongodb+srv://treader:admin@cluster0.gneuxuc.mongodb.net/treaders_bd`
-}else{
- MONGODB_URI = "mongodb://localhost:27017"
-}
 
 const app = express()
 

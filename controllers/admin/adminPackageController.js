@@ -487,3 +487,28 @@ exports.pkgApproved = (req,res,next) =>{
   }
 }
 
+exports.pkgApprovePost = (req,res,next)=>{
+  let pkg_payment_id = req.query.payment_id
+  try {
+    db.query("SELECT pkg_payment.pkg_sub_id,pkg_payment.pkg_id from pkg_payment join pkg_subscriber on pkg_payment.pkg_sub_id = pkg_subscriber.id WHERE pkg_payment.id = ?",[pkg_payment_id],(e,data)=>{
+      if(e){
+        next(e)
+      }else{
+        if(data.length>0){
+          db.query("update pkg_subscriber set approval_status=1 where id = ?;update packages set total_subscriber = total_subscriber + 1 where id = ?",[data[0].pkg_sub_id,data[0].pkg_id],(e,data2)=>{
+            if(e){
+              next(e)
+            }else{
+              res.redirect("/admin/packages/approve")
+            }
+          })
+        }else{
+          res.send("Not found any payment info")
+        }
+      }
+    })
+  } catch (error) {
+    next(error)
+  }
+}
+

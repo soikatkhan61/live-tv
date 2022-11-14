@@ -1,18 +1,24 @@
 const db = require("../../../config/db.config")
 const fs = require('fs');
 const Flash = require("../../../utils/Flash");
+const slugify = require('slugify')
 
 exports.renderTvController = (req,res,next) =>{
     res.render("admin/tv",{title:'TV Panel',flashMessage:''})
 }
 
 exports.renderAllChannels = (req,res,next) =>{
+    let currentPage = parseInt(req.query.page) || 1
+    let itemPerPage = 10
+
     try {
-        db.query("select id,channel_name,thumbnails,category,paid,createdAt from tv limit 12",(e,data)=>{
+        db.query("select count(*) as count from tv;select id,channel_name,thumbnails,category,paid,createdAt,slug from tv order by id desc limit ?,?",[((itemPerPage * currentPage) - itemPerPage),itemPerPage],(e,data)=>{
             if(e){
                 next(e)
             }else{
-                res.render("admin/tv/all-channels",{title:'All Channels',flashMessage:'',tv:data})
+                let totalChannel = data[0]
+                let totalPage = totalChannel[0].count / itemPerPage
+                res.render("admin/tv/all-channels",{title:'All Channels',flashMessage:Flash.getMessage(req),tv:data[1],currentPage,itemPerPage,totalPage,totalChannel})
             }
         })
     } catch (error) {
@@ -35,15 +41,16 @@ exports.createChannelPostController = (req,res,next) =>{
     if(!youtube){
         youtube = 'off'
     }
-
+    let slug = slugify(channel_name)
     try {
-        db.query('insert into tv values(?,?,?,?,?,?,?,?,?,?)',[null,channel_name,thumbnail,m3u8_link,category,paid,featured,youtube,null,null],(e,data)=>{
+        db.query('insert into tv values(?,?,?,?,?,?,?,?,?,?,?)',[null,slug,channel_name,thumbnail,m3u8_link,category,paid,featured,youtube,null,null],(e,data)=>{
             if(e){
                 next(e)
             }else{
                 console.log(data)
                 if(data.insertId){
-                    console.log("insert successfull")
+                    req.flash('success','channel create succssfull')
+                   res.redirect('/admin/tv/all-channels')
                 }
             }
         })

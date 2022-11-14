@@ -1,14 +1,14 @@
 const authRoute = require("./authRoute")
 const userRoute = require("./userRoute")
 const adminRoute = require("./adminRoute")
+const messageRoute = require("./messageRoute")
 const packageRoute = require("./packageRoute")
 const profileRoute = require("./profileRoute")
 const HomeRoute = require("./HomeRoute")
 const adRoute = require("./adRoute")
 const liveTVRoute = require("./liveTVRoute")
-const pg = require("./pg")
 
-const {searchResult} = require("../controllers/search")
+
 
 
 const routes = [
@@ -26,24 +26,20 @@ const routes = [
         handler: userRoute
     },
     {
-        path: "/packages",
-        handler: packageRoute
-    },
-    {
         path: "/profile",
         handler: profileRoute
     },
     {
-        path: "/pg",
-        handler: pg
-    },
-    {
-        path: "/search",
-        handler: searchResult
+        path: "/packages",
+        handler: packageRoute
     },
     {
         path: "/admin-ad",
         handler: adRoute
+    },
+    {
+        path: "/contact",
+        handler: messageRoute
     },
     {
         path: "/live-tv",

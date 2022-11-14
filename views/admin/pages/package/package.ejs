@@ -30,7 +30,7 @@
 <%- include('../../partials/sidebar.ejs') %> 
 
     <div class="container py-5">
-        <h3 class="text-center">We provide the best package, <span class="text-danger fw-bold"> Buy </span> and <span class="text-success fw-bold"> Earn </span> .</h3>
+        <h3 class="text-center">We provide the best package at <span class="text-success fw-bold"> Affordable Price  .</h3>
         <hr>
     </div>
       <div class="pricing-table my-3">
@@ -41,14 +41,14 @@
                 <h2>Silver</h2>
               </div>
               <div class="ptable-price">
-                <h2>$<%= pkg[0].price %><span></span></h2>
+                <h2><%= pkg[0].price %> TK<span></span></h2>
               </div>
             </div>
             <div class="ptable-body">
               <div class="ptable-description">
                 <ul>
                   <li>Silver</li>
-                  <li>Commision <%= pkg[0].package_comission %> %</li>
+                  <li>Validity <%= pkg[0].package_comission %> Month</li>
                   <li>Customer Support</li>
                   <li>Entry Level Package</li>
                 </ul>
@@ -72,14 +72,14 @@
                 <h2>Gold</h2>
               </div>
               <div class="ptable-price">
-                <h2>$<%= pkg[1].price %><span></span></h2>
+                <h2><%= pkg[1].price %> TK<span></span></h2>
               </div>
             </div>
             <div class="ptable-body">
               <div class="ptable-description">
                 <ul>
                   <li>Gold</li>
-                  <li>Commision <%= pkg[1].package_comission %> %</li>
+                  <li>Validity <%= pkg[1].package_comission %> Month</li>
                   <li>Customer Support</li>
                   <li>Most Selling Package</li>
                 </ul>
@@ -100,14 +100,14 @@
                 <h2>Platinum</h2>
               </div>
               <div class="ptable-price">
-                <h2>$<%= pkg[2].price %><span></span></h2>
+                <h2><%= pkg[2].price %> TK<span></span></h2>
               </div>
             </div>
             <div class="ptable-body">
               <div class="ptable-description">
                 <ul>
                   <li>Platinium</li>
-                   <li>Commision <%= pkg[2].package_comission %> %</li>
+                   <li>Validity <%= pkg[2].package_comission %> Month</li>
                   <li>Customer Support</li>
                   <li>Master Package</li>
                 </ul>

@@ -11,14 +11,19 @@ exports.renderCreateAd = (req, res, next) => {
 };
 
 exports.getAllAds = (req, res, next) => {
+  let currentPage = parseInt(req.query.page) || 1
+  let itemPerPage = 10
   try {
-    db.query("select * from ad limit 10", (e, data) => {
+    db.query("select count(*) as count from ad;select * from ad limit ?,?",[((itemPerPage * currentPage) - itemPerPage),itemPerPage], (e, data) => {
       if (e) {
         next(e);
       } else {
+        let totalAd = data[0]
+        let totalPage = totalAd[0].count / itemPerPage
         res.render("admin/ad/all-ad", {
-          ads: data,
+          ads: data[1],
           title: "Our Ad",
+          currentPage,itemPerPage,totalPage,totalAd,
           flashMessage: Flash.getMessage(req),
         });
       }

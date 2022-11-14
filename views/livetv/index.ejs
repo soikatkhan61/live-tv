@@ -2,61 +2,10 @@
 
     <div class="container-fluid py-md-4 shadow-sm" style="background-color:#F2F4F8;min-height:100vh">
         <div class="container pb-4 rounded" style="background-color: rgb(255, 255, 255);">
-            <div class="row p-3">
-                <div class="col-sm-12 col-md-4 col-lg-3 border p-2 d-none d-lg-block">
-                    <div class="ad">
-                        <p class="text-center pb-0 mt-1 fw-bold">Sponsored</p>
-                        <div class="swiper mySwiper">
-                            <div class="swiper-wrapper">
-                              <% if(ad.length > 0){ %>
-                                <% for(a of ad){ %>
-                                  <div class="swiper-slide">
-                                    <img src="<%= a.ad_image %> " />
-                                  </div> 
-                                <% } %> 
-                              <% } %> 
-                            </div>
-                            <div class="swiper-pagination"></div>
-                          </div>
-
-                          <div class="d-flex justify-content-center">
-                            <a href="/contact" class="btn">Contact For Ad</a>
-                          </div>
-                    </div>
-                </div>
-                <div class="col-sm-12 col-md-8 col-lg-6 d-flex justify-content-center align-items-center">
-                    <!-- HTML -->
-                    <video id='hls-example' class="video-js vjs-default-skin" width="650"
-                        style="height: 500px!important;width: 100%!important;" controls>
-                        <source type="application/x-mpegURL" src="<%= single_tv[0].link %>">
-                    </video>
-                </div>
-                <div class="col-sm-12 col-md-4 col-lg-3 border p-2 d-none d-lg-block">
-                    <div class="ad">
-                        <p class="text-center pb-0 mt-1 fw-bold">Sponsored</p>
-                        <div class="swiper mySwiper">
-                            <div class="swiper-wrapper">
-                              <% if(ad.length > 0){ %>
-                                <% for(a of ad){ %>
-                                  <div class="swiper-slide">
-                                    <img src="<%= a.ad_image %> " />
-                                  </div> 
-                                <% } %> 
-                              <% } %> 
-                            </div>
-                            <div class="swiper-pagination"></div>
-                          </div>
-
-                          <div class="d-flex justify-content-center">
-                            <a href="/contact" class="btn">Contact For Ad</a>
-                          </div>
-                    </div>
-                </div>
-            </div>
-
             <div>
-              <h5>TV Channel</h5>
-
+              <h3 class="text-center py-3">LIVE TV Channel</h3>
+              <h5>Featured</h5>
+              <hr>
               <div class="row">
                   <% if(tv.length == 0){ %> 
                       <p>No TV Channel</p>
@@ -146,4 +95,4 @@
                         var player = videojs('hls-example');
                         player.play();
                     </script>
-    <%- include('../partials/footer') %>
+    <%- include('../partials/footer') %></div>

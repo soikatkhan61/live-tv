@@ -52,7 +52,8 @@ CREATE TABLE IF NOT EXISTS pkg_payment(
     user_id int ,FOREIGN KEY(user_id) REFERENCES users(id),
     pkg_sub_id  int, FOREIGN KEY(pkg_sub_id) REFERENCES pkg_subscriber(id),
     pkg_id  int, FOREIGN KEY(pkg_id) REFERENCES packages(id),
-	payment_method ENUM('TRC20','PayID'),
+	payment_method ENUM('Bkash','Rocket'),
+    Phone_No varchar(15) not null,
     transaction_number varchar(50) not null,
     createdAt TIMESTAMP(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
     updatedAt TIMESTAMP(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6)
@@ -83,11 +84,12 @@ CREATE TABLE IF NOT EXISTS withdraw (
 
 CREATE TABLE IF NOT EXISTS tv (
     id INT PRIMARY KEY AUTO_INCREMENT,
+    slug varchar(100) not null,
     channel_name varchar(255) not null,
     thumbnails varchar(255) not null,
     link varchar(255) not null,
     category varchar(50) not null,
-    paid varchar(100) DEFAULT null,
+    paid varchar(100) DEFAULT 'Free',
     featured enum("on","off") DEFAULT "off",
     youtube enum("on","off") DEFAULT "off",
     updatedAt TIMESTAMP(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6),

@@ -16,7 +16,7 @@
                     <p>Registered: <span class="fw-bold fst-italic"><%= pkg[0].createdAt.toDateString() %> </span></p>
                     <p>Package: <span class="fw-bold fst-italic"><%= pkg[0].package_name %></span></p>
                     <p>Package Price: <span class="fw-bold fst-italic"><%= pkg[0].price %> TK</span></p>
-                    <p>Channel: <span class="fw-bold fst-italic"><%= pkg[0].package_comission %></span></p>
+                    <p>Validity: <span class="fw-bold fst-italic"><%= pkg[0].package_comission %> Month</span></p>
                     <p>Payment Status:  <span class="badge badge-<%= pkg[0].approval_status === 1 ? "success" : "warning" %> rounded-pill d-inline"><%= pkg[0].approval_status === 1 ? "paid" : "payment pending" %> </span></p>
 
                     <% if(pkg_payment.length){ %> 
