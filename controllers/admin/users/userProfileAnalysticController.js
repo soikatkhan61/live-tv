@@ -1,5 +1,5 @@
 const db = require("../../../config/db.config")
-
+const Flash = require("../../utils/Flash");
 exports.profileSearchAndGetController = (req,res,next) =>{
     let username = req.query.username
     if(username){

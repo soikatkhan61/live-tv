@@ -7,8 +7,6 @@ CREATE TABLE IF NOT EXISTS users (
     isVerified int(1) DEFAULT 0,
     verfication_id int(8) DEFAULT -1,
     profilePics varchar(200) DEFAULT "/uploads/avater.jpg",
-    balance double(8,2) DEFAULT 0,
-    pending_balance double(8,2) DEFAULT 5,
     isBanned ENUM('0','1') DEFAULT "0",
     createdAt TIMESTAMP(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6)
 );
@@ -27,16 +25,6 @@ INSERT INTO `packages`(`id`, `package_name`, `price`, `package_comission`, `tota
 INSERT INTO `packages`(`id`, `package_name`, `price`, `package_comission`, `total_subscriber`, `createdAt`) VALUES (null,'platinum',30000,5,0,null);
 
 
-CREATE TABLE IF NOT EXISTS task (
-    id INT PRIMARY KEY AUTO_INCREMENT,
-    user_id int, FOREIGN KEY(user_id) REFERENCES users(id),
-    pkg_id int, FOREIGN KEY(pkg_id) REFERENCES packages(id),
-    remain_task int(2) DEFAULT 10,
-    todays_comission double(8,2) DEFAULT 0,
-    yesterday double(8,2) DEFAULT 0,
-    updatedAt TIMESTAMP(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
-    createdAt TIMESTAMP(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6)
-);
 
 CREATE TABLE IF NOT EXISTS pkg_subscriber (
     id INT PRIMARY KEY AUTO_INCREMENT,
@@ -53,34 +41,12 @@ CREATE TABLE IF NOT EXISTS pkg_payment(
     pkg_sub_id  int, FOREIGN KEY(pkg_sub_id) REFERENCES pkg_subscriber(id),
     pkg_id  int, FOREIGN KEY(pkg_id) REFERENCES packages(id),
 	payment_method ENUM('Bkash','Rocket'),
-    Phone_No varchar(15) not null,
+    phone_no varchar(15) not null,
     transaction_number varchar(50) not null,
     createdAt TIMESTAMP(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
     updatedAt TIMESTAMP(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6)
 );
 
-CREATE TABLE IF NOT EXISTS mlm (
-    id INT PRIMARY KEY AUTO_INCREMENT,
-    user_id int , FOREIGN key(user_id) REFERENCES users(id),
-    isRef int(1) DEFAULT 0,
-    refBy varchar(100), FOREIGN KEY(refBy) REFERENCES users(username),
-    ref_by_id int, FOREIGN KEY(ref_by_id) REFERENCES users(id),
-    updatedAt TIMESTAMP(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
-    createdAt TIMESTAMP(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6)
-);
-
-
-CREATE TABLE IF NOT EXISTS withdraw (
-    id INT PRIMARY KEY AUTO_INCREMENT,
-    user_id int , FOREIGN key(user_id) REFERENCES users(id),
-    amount int(6) not null,
-    method varchar(20) not null,
-    number varchar(20) not null,
-    tx_id varchar(100) DEFAULT null,
-    statuss enum("paid","pending") DEFAULT "pending",
-    updatedAt TIMESTAMP(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
-    createdAt TIMESTAMP(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6)
-);
 
 CREATE TABLE IF NOT EXISTS tv (
     id INT PRIMARY KEY AUTO_INCREMENT,
@@ -107,5 +73,15 @@ CREATE TABLE IF NOT EXISTS ad (
     providor_num varchar(15),
     ad_image varchar(300) not null,
     updatedAt TIMESTAMP(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
+    createdAt TIMESTAMP(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6)
+);
+
+CREATE TABLE IF NOT EXISTS contact (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    name varchar (50) not null,
+    email VARCHAR(255),
+    phone VARCHAR(15) NOT NULL,
+    message varchar(1000),
+    respond ENUM('yes','no'),
     createdAt TIMESTAMP(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6)
 );

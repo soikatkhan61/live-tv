@@ -9,11 +9,11 @@ const nodemailer = require("nodemailer");
 const { google } = require("googleapis");
 
 const CLIENT_ID =
-  "296143572975-d677gq5frje0f4dv76b94hrdpqi9t67c.apps.googleusercontent.com";
-const CLIENT_SECRET = "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";
+  "382120569097-jr3l389ldhbh7ra3178jb1nbirl7cb2a.apps.googleusercontent.com";
+const CLIENT_SECRET = "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";
 const REDIRECT_URI = "https://developers.google.com/oauthplayground";
 const REFRESH_TOKEN =
-  "1//04c-_brLsKaykCgYIARAAGAQSNwF-L9IrjwcJNs6ZJrSPJKKQU6M3CHLs4E3YhgveLt1AJea8EmsvwTaUZSnHtawbXRU5h5QYF7g";
+  "1//04ayNyDI_rN7wCgYIARAAGAQSNwF-L9Ir0_JJHT2csDBRCjhXR_tQYvnqZtyjeTsX2wrF0p__6csbjo2sohUeqslC9wokSHuoOVI";
 
 const oAuth2Client = new google.auth.OAuth2(
   CLIENT_ID,
@@ -46,7 +46,6 @@ exports.signUpPostController = async (req, res, next) => {
   console.log(errors);
 
   if (!errors.isEmpty()) {
-    console.log("error khaicho ");
     req.flash("fail", "Please check your form");
     return res.render("pages/auth/register", {
       title: "Create a new account",
@@ -102,7 +101,7 @@ exports.signUpPostController = async (req, res, next) => {
                 });
               }else{
                                 db.query(
-                  "insert into users values(?,?,?,?,?,?,?,?,?,?,?,?)",
+                  "insert into users values(?,?,?,?,?,?,?,?,?,?)",
                   [
                     null,
                     "user",
@@ -112,8 +111,6 @@ exports.signUpPostController = async (req, res, next) => {
                     0,
                     -1,
                     "/uploads/avater.jpg",
-                    0,
-                    5,
                     '0',
                     null,
                   ],
@@ -258,7 +255,7 @@ exports.sendVerifyCode = async (req, res, next) => {
         service: "gmail",
         auth: {
           type: "OAuth2",
-          user: "cryptoworldglobal9@gmail.com",
+          user: "isptv22@gmail.com",
           clientId: CLIENT_ID,
           clientSecret: CLIENT_SECRET,
           refreshToken: REFRESH_TOKEN,
@@ -266,7 +263,7 @@ exports.sendVerifyCode = async (req, res, next) => {
         },
       });
       const mailOptions = {
-        from: "Crypto worldglobal <cryptoworldglobal9@gmail.com>",
+        from: "ISP TV <isptv22@gmail.com>",
         to: `${email}`,
         subject: "Thank You for Sing up! Just do one step more!",
         html: `
@@ -351,7 +348,7 @@ exports.sendVerifyCode = async (req, res, next) => {
 
       await transport.sendMail(mailOptions, function (error, info) {
         if (error) {
-          next(e);
+          next(error);
         } else {
           db.query(
             "update users set verfication_id= ? where email=?",

@@ -54,13 +54,10 @@
             </div>
 
             <div>
-                <h5>TV Channel</h5>
-
                 <div class="row">
-                    <% if(tv.length == 0){ %> 
-                        <p>No TV Channel</p>
-                    <% }else{ %> 
-                        <% for(let t of tv){ %> 
+                    <% if(featured.length > 0){ %> 
+                      <h5>Featured Channel</h5>
+                        <% for(let t of featured){ %> 
                           <div class="col-4 col-md-3 col-lg-2">
                             <div class="content-grid-block">
                               <div class="content-item-container">

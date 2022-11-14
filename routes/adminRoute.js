@@ -16,6 +16,9 @@ const {msgGetContrller,singleMsgGetContrller,deleteMsgGetContrller,respondMessag
 
 const {renderTvController,renderAllChannels,createChannelPostController,editChannelGetController,editChannelPostController,deleteChannel} = require('../controllers/admin/tv/tvController')
 
+const {getAllUsers,bannedAnUser} = require('../controllers/admin/users/usersController')
+
+
 
 router.get("/tv/all-channels",isAuthenticated,checkAdmin,renderAllChannels)
 router.post("/tv/create-channel",isAuthenticated,checkAdmin,upload.single('thumbnail'),createChannelPostController)
@@ -42,6 +45,10 @@ router.get("/approve-pkg",isAuthenticated,checkAdmin,pkgApproved)
 router.get("/packages/approve",isAuthenticated,checkAdmin,pkgApproveGet)
 router.get("/packages/approvethis",isAuthenticated,checkAdmin,pkgApprovePost)
 
+
+
+router.get("/users",isAuthenticated,checkAdmin,getAllUsers)
+router.get("/users/banned",isAuthenticated,checkAdmin,bannedAnUser)
 
 
 router.get("/",isAuthenticated,checkAdmin,adminDashboardGetController)

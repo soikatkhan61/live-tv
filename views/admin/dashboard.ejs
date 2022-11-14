@@ -7,11 +7,11 @@
                     <!-- COUNTER -->
                     <div class="counter">
                         <div class="counter-title">
-                            Total Users
+                            Total Payment Recieved
                         </div>
                         <div class="counter-info">
                             <div class="counter-count">
-                                <%= totalUser[0].totalUser %> 
+                                <%= payment.paid %> TK
                             </div>
                             <i class='bx bx-shopping-bag'></i>
                         </div>
@@ -24,11 +24,11 @@
                     <!-- COUNTER -->
                     <div class="counter">
                         <div class="counter-title">
-                            Total Withdraw
+                            Total Payment Due
                         </div>
                         <div class="counter-info">
                             <div class="counter-count">
-                                $<%= user.pending_balance ? user.pending_balance : '1000' %>
+                                <%= payment.due %> TK
                             </div>
                             <i class='bx bx-chat'></i>
                         </div>
@@ -58,11 +58,11 @@
                     <!-- COUNTER -->
                     <div class="counter">
                         <div class="counter-title">
-                            Trafic
+                            Total Users
                         </div>
                         <div class="counter-info">
                             <div class="counter-count">
-                                45468
+                                <%= totalUser[0].totalUser %> 
                             </div>
                             <i class='bx bx-user'></i>
                         </div>
@@ -149,7 +149,7 @@
                                 <tbody>
                                     <% for(let r of recentUser){ %> 
                                         <tr>
-                                            <td><a class="btn-link" href="/profile/<%= r.username %>"><%= r.username %></a> </td>
+                                            <td><a class="btn-link" href="#"><%= r.username %></a> </td>
                                             <td>
                                                 <%= r.email %>
                                             </td>

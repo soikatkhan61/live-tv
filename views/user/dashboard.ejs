@@ -1,61 +1,6 @@
 <%- include('./user_partials/header.ejs') %>
 
     <div class="main-content">
-        <div class="row" style="color: white;">
-            <div class="col-4 col-md-6 col-sm-12">
-                <div class="box box-hover" style="background-color: #28a745!important;" >
-                    <!-- COUNTER -->
-                    <div class="counter">
-                        <div class="counter-title">
-                            Balance
-                        </div>
-                        <div class="counter-info">
-                            <div class="counter-count">
-                                $<%= user.balance ? user.balance : '0' %>
-                            </div>
-                            <i class='bx bx-shopping-bag'></i>
-                        </div>
-                    </div>
-                    <!-- END COUNTER -->
-                </div>
-            </div>
-            <div class="col-4 col-md-6 col-sm-12">
-                <div class="box box-hover" style="background-color: #dc3545!important;">
-                    <!-- COUNTER -->
-                    <div class="counter">
-                        <div class="counter-title">
-                            Pending Balance
-                        </div>
-                        <div class="counter-info">
-                            <div class="counter-count">
-                                $<%= user.pending_balance ? user.pending_balance : '1000' %>
-                            </div>
-                            <i class='bx bx-chat'></i>
-                        </div>
-                    </div>
-                    <!-- END COUNTER -->
-                </div>
-            </div>
-            <div class="col-4 col-md-6 col-sm-12">
-                <div class="box box-hover" style="background-color: #17a2b8!important;">
-                    <!-- COUNTER -->
-                    <div class="counter">
-                        <div class="counter-title">
-                            Level 1
-                        </div>
-                        <div class="counter-info">
-                            <div class="counter-count">
-                                <%= user.refer_list ? user.refer_list.length : '0' %>
-                            </div>
-                            <i class='bx bx-line-chart'></i>
-                        </div>
-                    </div>
-                    <!-- END COUNTER -->
-                </div>
-            </div>
-
-        </div>
-
         <div>
             <div class="row">
                 <div class="col-sm-12 col-md-6 col-lg-3">
@@ -67,7 +12,6 @@
                           <p class="card-text mb-0">Registered: <span class="fst-italic"><%= user.createdAt.toDateString() %></span> </p>
                           
                         </div>
-                        <div class="card-footer bg-transparent border-dark d-flex justify-content-center"><a class="btn btn-dark" href="/profile/<%= user.username %>">visit profile</a></div>
                     </div>
                 </div>
                

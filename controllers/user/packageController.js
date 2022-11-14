@@ -71,7 +71,12 @@ exports.renderMyPackage = async (req, res, next) => {
           next(e);
         } else {
           if(data.length>0){
-            console.log(" im here from etae")
+            var d = data[0].createdAt;
+            // console.log(d);
+            // console.log(d.toDateString());
+            // d.setMonth(d.getMonth() - data[0].package_comission);
+            // console.log(d.toDateString());
+
             db.query("select * from pkg_payment where user_id=? and pkg_id=?",[req.user.id,data[0].pkg_id],(e,checkPkgPayment)=>{
               if(e){
                 return next(e)
@@ -130,14 +135,14 @@ exports.renderPkgPayment = async(req,res,next) =>{
 }
 
 exports.pkgPaymentPostContrller = async(req,res,next) =>{
-    let {pkg_id,pkg_sub_id,payment_method,txid} = req.body
+    let {pkg_id,pkg_sub_id,payment_method,txid,phone_no} = req.body
     try {
         db.query("select * from pkg_subscriber where  id=? and user_id=? and pkg_id=? ",[pkg_sub_id,req.user.id,pkg_id],(e,data)=>{
             if(e){
                 return next(e)
             }else{
                 if(data.length>0){
-                  db.query("insert into pkg_payment values(?,?,?,?,?,?,?,?)",[null,req.user.id,pkg_sub_id,pkg_id,payment_method,txid,null,null],(e,insert)=>{
+                  db.query("insert into pkg_payment values(?,?,?,?,?,?,?,?,?)",[null,req.user.id,pkg_sub_id,pkg_id,payment_method,phone_no,txid,null,null],(e,insert)=>{
                     if(e){
                       return next(e)
                     }else{
