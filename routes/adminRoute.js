@@ -9,7 +9,7 @@ const {
 } = require('../middleware/authMiddleware')
 
 const {adminDashboardGetController,packageAnalysticGetController} = require('../controllers/admin/adminController')
-const {adminPackageGetController,packageEditGetController,packageEditPostController,pkgApproveGet,pkgApproved,pkgApprovePost} = require("../controllers/admin/adminPackageController")
+const {adminPackageGetController,packageEditGetController,packageEditPostController,pkgApproveGet,pkgApproved,pkgApprovePost,pkgPaymentReject} = require("../controllers/admin/adminPackageController")
 
 const {msgGetContrller,singleMsgGetContrller,deleteMsgGetContrller,respondMessage} = require("../controllers/contactUsController")
 
@@ -44,6 +44,7 @@ router.post("/packages/edit-package",isAuthenticated,checkAdmin,packageEditPostC
 router.get("/approve-pkg",isAuthenticated,checkAdmin,pkgApproved)
 router.get("/packages/approve",isAuthenticated,checkAdmin,pkgApproveGet)
 router.get("/packages/approvethis",isAuthenticated,checkAdmin,pkgApprovePost)
+router.post("/packages/reject",isAuthenticated,checkAdmin,pkgPaymentReject)
 
 
 

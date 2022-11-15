@@ -89,22 +89,43 @@ exports.packageEditPostController = async (req, res, next) => {
 //package request get and accept
 exports.pkgApproveGet = async (req, res, next) => {
   try {
-    db.query(
-      `SELECT
-    users.id as userID, users.username, users.email, packages.package_name, packages.price, packages.package_comission,pkg_payment.id as  pkg_payment_id,pkg_payment.payment_method,pkg_payment.createdAt,pkg_subscriber.approval_status,pkg_subscriber.id as pkg_subb_id ,pkg_payment.transaction_number
-  FROM packages
-  
-  JOIN pkg_payment
-    ON packages.id = pkg_payment.pkg_id 
 
-  JOIN users
-    ON pkg_payment.user_id = users.id
+    let sql = `
+    SELECT
+      users.id as userID, users.username, users.email, packages.package_name, packages.price, packages.package_comission,pkg_payment.id as  pkg_payment_id,pkg_payment.payment_method,pkg_payment.createdAt,pkg_payment.message,pkg_subscriber.approval_status,pkg_subscriber.id as pkg_subb_id ,pkg_payment.transaction_number
+    FROM packages
     
-   JOIN pkg_subscriber
-    ON pkg_subscriber.user_id = pkg_payment.user_id
-    where pkg_subscriber.approval_status = 0
-     LIMIT 20`,
-      (e, data) => {
+    JOIN pkg_payment
+      ON packages.id = pkg_payment.pkg_id 
+  
+    JOIN users
+      ON pkg_payment.user_id = users.id
+      
+     JOIN pkg_subscriber
+      ON pkg_subscriber.user_id = pkg_payment.user_id
+      where pkg_subscriber.approval_status = 0 order by pkg_subscriber.id  desc
+       LIMIT 40`
+    let rejected = req.query.rejected
+
+    if(rejected == 'true'){
+      sql = `
+      SELECT
+      users.id as userID, users.username, users.email, packages.package_name, packages.price, packages.package_comission,pkg_payment.id as  pkg_payment_id,pkg_payment.payment_method,pkg_payment.createdAt,pkg_payment.message,pkg_subscriber.approval_status,pkg_subscriber.id as pkg_subb_id ,pkg_payment.transaction_number
+    FROM packages
+    
+    JOIN pkg_payment
+      ON packages.id = pkg_payment.pkg_id 
+  
+    JOIN users
+      ON pkg_payment.user_id = users.id
+      
+     JOIN pkg_subscriber
+      ON pkg_subscriber.user_id = pkg_payment.user_id
+      where pkg_subscriber.approval_status = 0 and pkg_payment.message IS NOT NULL order by pkg_subscriber.id  desc
+       LIMIT 40`
+    }
+
+    db.query(sql,(e, data) => {
         if (e) {
           next(e);
         } else {
@@ -171,6 +192,23 @@ exports.pkgApprovePost = (req,res,next)=>{
         }
       }
     })
+  } catch (error) {
+    next(error)
+  }
+}
+
+exports.pkgPaymentReject = (req,res,next)=>{
+  let {id,message} = req.body
+  try {
+        db.query("update pkg_payment set message=?  where id = ?;",[message,id],(e,data2)=>{
+          if(e){
+            next(e)
+          }else{
+            console.log(data2);
+            req.flash("success",'Rejected Request Complete')
+            res.redirect("/admin/packages/approve")
+          }
+        })
   } catch (error) {
     next(error)
   }

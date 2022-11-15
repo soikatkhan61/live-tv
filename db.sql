@@ -43,9 +43,11 @@ CREATE TABLE IF NOT EXISTS pkg_payment(
 	payment_method ENUM('Bkash','Rocket'),
     phone_no varchar(15) not null,
     transaction_number varchar(50) not null,
+    message varchar(1000) DEFAULT null,
     createdAt TIMESTAMP(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
     updatedAt TIMESTAMP(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6)
 );
+
 
 
 CREATE TABLE IF NOT EXISTS tv (

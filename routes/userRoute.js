@@ -6,7 +6,7 @@ const {
 } = require('../middleware/authMiddleware')
 
 
-const {renderMyPackage,renderPkgPayment,pkgPaymentPostContrller} = require("../controllers/user/packageController")
+const {renderMyPackage,renderPkgPayment,pkgPaymentPostContrller,editPkgPayment,editPkgPaymentPostController} = require("../controllers/user/packageController")
 const {dashboardGetController,renderUserSearch} = require("../controllers/user/dashboardController")
 
 
@@ -14,6 +14,10 @@ const {dashboardGetController,renderUserSearch} = require("../controllers/user/d
 
 router.get("/my_package",isAuthenticated,renderMyPackage)
 router.get("/pay/:pkg_id",isAuthenticated,renderPkgPayment)
+
+router.get("/edit_payment",isAuthenticated,editPkgPayment)
+router.post("/edit_payment",isAuthenticated,editPkgPaymentPostController)
+
 router.post("/pay",isAuthenticated,pkgPaymentPostContrller)
 
 

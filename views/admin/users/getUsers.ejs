@@ -27,7 +27,7 @@
                         <td><%= u.email %></td>
                         <td><span class="badge badge-<%= u.isVerified ? 'success' : 'danger' %> "><%= u.isVerified ? 'Verified' : 'Non Verified' %></span></td>
 
-                        <td><span class="badge badge-<%= u.isVerified == '-1' ? 'success' : 'primary' %> "><%= u.isVerified ? 'Verified' : 'Non Verified' %></span></td>
+                        <td><span class="badge badge-<%= u.isVerified == '-1' ? 'success' : 'primary' %> "><%= u.isVerified ? 'Verified' : u.verfication_id  %></span></td>
 
                         <td>
                           <span class="badge badge-<%= u.isBanned == '0' ? 'success' : 'danger' %> "><%= u.isBanned == '0' ? 'allowable' : 'Banned' %></span>
