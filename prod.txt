@@ -1,7 +1,7 @@
  
-DB_NAME=cryptoworld_database
-DB_PASS=jahid@123jahid
-DB_USER=cryptoworld_jahid
-JWT_SECRET_KEY	jahid123
-Un9n1sC)6D;aJ9U
+DB_NAME= srnetwor_live_tv
+DB_PASS=Ao9T9PM1M}&[
+DB_USER=srnetwor_live_tv_user
+JWT_SECRET_KEY=jdiopjadgkljsdag
+
 DB_HOST=localhost
