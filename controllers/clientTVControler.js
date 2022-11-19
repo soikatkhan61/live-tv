@@ -4,7 +4,7 @@ const Flash = require("../utils/Flash");
 exports.renderSingleTV = (req,res,next) =>{
     let channel_name = req.params.id
     try {
-        db.query("select category from tv;select * from tv where slug = ? limit 1;select channel_name,slug,thumbnails,category from tv;select ad_link,ad_image from ad limit 10;select channel_name,slug,thumbnails,category,paid from tv where featured='on' limit 10",[channel_name],(e,data)=>{
+        db.query("select category from tv;select * from tv where slug = ? limit 1;select channel_name,slug,thumbnails,category,paid,youtube from tv;select ad_link,ad_image from ad limit 10;select channel_name,slug,thumbnails,category,paid from tv where featured='on' limit 10",[channel_name],(e,data)=>{
             if(e){
                 next(e)
             }else{
@@ -18,7 +18,7 @@ exports.renderSingleTV = (req,res,next) =>{
 
 
                 if(paid == 'Free'){
-                    return res.render("livetv/singletv",{flashMessage:'',title:'TV',cat:unique,single_tv:data[1],tv:data[2],ad:data[3]})
+                    return res.render("livetv/singletv",{flashMessage:'',title:'TV',cat:unique,single_tv:data[1],tv:data[2],ad:data[3],featured:data[4]})
                 }else{
                     console.log(req.user);
                     if(!req.user){

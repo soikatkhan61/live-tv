@@ -28,7 +28,7 @@ exports.renderAllChannels = (req,res,next) =>{
 }
 
 exports.createChannelPostController = (req,res,next) =>{
-    let {channel_name,m3u8_link,category,featured,youtube,paid} = req.body
+    let {channel_name,m3u8_link,youtube_link,category,featured,youtube,paid} = req.body
 
     let thumbnail
     if(req.file){
@@ -43,7 +43,7 @@ exports.createChannelPostController = (req,res,next) =>{
     }
     let slug = slugify(channel_name)
     try {
-        db.query('insert into tv values(?,?,?,?,?,?,?,?,?,?,?)',[null,slug,channel_name,thumbnail,m3u8_link,category,paid,featured,youtube,null,null],(e,data)=>{
+        db.query('insert into tv values(?,?,?,?,?,?,?,?,?,?,?,?)',[null,slug,channel_name,thumbnail,m3u8_link,youtube_link,category,paid,featured,youtube,null,null],(e,data)=>{
             if(e){
                 next(e)
             }else{
@@ -78,7 +78,7 @@ exports.editChannelGetController = (req,res,next) =>{
     }
 }
 exports.editChannelPostController = (req,res,next) =>{
-    let {channel_id,channel_name,m3u8_link,category,featured,youtube,paid,thumbnail} = req.body
+    let {channel_id,channel_name,m3u8_link,youtube_link,category,featured,youtube,paid,thumbnail} = req.body
     try {
         db.query("select * from tv where id = ? limit 1",[channel_id],(e,data)=>{
             if(e){
@@ -105,7 +105,7 @@ exports.editChannelPostController = (req,res,next) =>{
                         thumbnail = data[0].thumbnails
                     }
 
-                    db.query("update tv set channel_name = ? ,link = ?,thumbnails = ?,category=?,featured=?,youtube=?,paid=? where id = ? ",[channel_name,m3u8_link,thumbnail,category,featured,youtube,paid,channel_id],(e,data)=>{
+                    db.query("update tv set channel_name = ? ,link = ?,youtube_link=?,thumbnails = ?,category=?,featured=?,youtube=?,paid=? where id = ? ",[channel_name,m3u8_link,youtube_link,thumbnail,category,featured,youtube,paid,channel_id],(e,data)=>{
                         if(e){
                             next(e)
                         }else{

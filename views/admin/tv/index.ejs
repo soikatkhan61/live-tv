@@ -30,9 +30,11 @@
                     }
                 </script>
                 <div class="form-outline mt-3">
-                    <input type="url" name="m3u8_link" id="form7Example1" class="form-control" required/>
-                    <label class="form-label" for="form7Example1">Channel m3u8 link *</label>
-                  </div>
+                    <input type="url" name="m3u8_link" id="form7Example1" class="form-control" />
+                    <label class="form-label" for="form7Example1">Channel m3u8 link</label>
+                </div>
+
+                
 
                 <div class="mt-3">
                     <script>
@@ -46,13 +48,14 @@
                         style="width: 100%; outline: black">
                         <option class="py-2 px-5">Channel Category *</option>
                         <option class="py-2 px-5" value="ZEE NETWORKS">ZEE NETWORKS</option>
-                        <option class="py-2 px-5" value="ZEE NETWORKS">ENTERTAINMENT</option>
-                        <option class="py-2 px-5" value="ZEE NETWORKS">MUSIC</option>
-                        <option class="py-2 px-5" value="ZEE NETWORKS">MOVIES</option>
-                        <option class="py-2 px-5" value="Sports">NEWS</option>
-                        <option class="py-2 px-5" value="Cartoon">Sports Channel</option>
-                        <option class="py-2 px-5" value="Cartoon">RELIGIOUS</option>
-                        <option class="py-2 px-5" value="Cartoon">Infotainment</option>
+                        <option class="py-2 px-5" value="ENTERTAINMENT">ENTERTAINMENT</option>
+                        <option class="py-2 px-5" value="MUSIC">MUSIC</option>
+                        <option class="py-2 px-5" value="MOVIES">MOVIES</option>
+
+                        <option class="py-2 px-5" value="NEWS">NEWS</option>
+                        <option class="py-2 px-5" value="Sports Channel">SPORTS</option>
+                        <option class="py-2 px-5" value="RELIGIOUS">RELIGIOUS</option>
+                        <option class="py-2 px-5" value="Infotainment">INFOTAINMENT</option>
                     </select>
                     <input id="category" name="category" value="" class="d-none" >
                 </div>
@@ -60,8 +63,18 @@
                 <div class="mt-3 d-flex">
                     <label for="flexCheckDefault">Featured</label>
                     <input name="featured" class="form-check-input mx-2" type="checkbox" id="flexCheckDefault" />
+                    
+                    <div id="youtube_checkbox">
+                        <label for="youtube_checkbox_input">From Youtube</label>
+                        <input name="youtube" class="form-check-input mx-2" type="checkbox" id="youtube_checkbox_input" />
+                    </div>
 
     
+                </div>
+
+                <div class="form-outline mt-3" id="youtube_link_input" style="display: none;">
+                    <input type="text" name="youtube_link" id="form7Example1" class="form-control" />
+                    <label class="form-label" for="form7Example1">Youtube iframe</label>
                 </div>
 
                 <div class="mt-3">

@@ -23,12 +23,21 @@
                           </div>
                     </div>
                 </div>
+               
                 <div class="col-sm-12 col-md-8 col-lg-6 d-flex justify-content-center align-items-center">
-                    <!-- HTML -->
-                    <video id='hls-example' class="video-js vjs-default-skin" width="650"
-                        style="height: 500px!important;width: 100%!important;" controls>
-                        <source type="application/x-mpegURL" src="https://edge4.bioscopelive.com/hls/anonymous/O_deZbSaftvQVBV96ivmcA/1667763526/colors_bangla_mid/index.m3u8">
-                    </video>
+                  
+                    <video-js id='hls-example' class="video-js vjs-big-play-centered vjs-theme-fantasy" width="650"
+                        style="min-height: 500px!important;width: 100%!important;" controls >
+                        <source type="application/x-mpegURL" src="https://edge4.bioscopelive.com/hls/anonymous/M3BhaVcyQmxVoZBZ4mMMYA/1668868180/shomoy_tv_hi/index.m3u8">
+                        <p class="vjs-no-js">
+                          To view this video please enable JavaScript, and consider upgrading to a
+                          web browser that
+                          <a href="https://videojs.com/html5-video-support/" target="_blank"
+                            >supports HTML5 video</a
+                          >
+                        </p>
+                    </video-js>
+
                 </div>
                 <div class="col-sm-12 col-md-4 col-lg-3 border p-2 d-none d-lg-block">
                     <div class="ad">
@@ -104,7 +113,7 @@
                               <a href="/live-tv/<%= t.slug %> ">
                                   <div class="image-wrapper">
                                     <div class="content-badge live-tv">
-                                      <span class="prime <%= t.paid == 'Free' ? 'd-none' : '' %> ">prime</span>
+                                      <span class="prime <%= t.paid == 'Free' ? 'd-none' : '' %> ">prime  </span>
                                     </div>
 
                                     <div class="image-block">
@@ -133,13 +142,24 @@
 
  <!-- JS code -->
                     <!-- If you'd like to support IE8 (for Video.js versions prior to v7) -->
-                    <script src="https://vjs.zencdn.net/ie8/ie8-version/videojs-ie8.min.js"></script>
-                    <script
-                        src="https://cdnjs.cloudflare.com/ajax/libs/videojs-contrib-hls/5.14.1/videojs-contrib-hls.js"></script>
-                    <script src="https://vjs.zencdn.net/7.2.3/video.js"></script>
+<script src="https://vjs.zencdn.net/ie8/ie8-version/videojs-ie8.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/videojs-contrib-hls/5.15.0/videojs-contrib-hls.min.js" integrity="sha512-R1+Pgd+uyqnjx07LGUmp85iW8MSL1iLR2ICPysFAt8Y4gub8C42B+aNG2ddOfCWcDDn1JPWZO4eby4+291xP9g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+                    
+<script src="https://vjs.zencdn.net/7.20.3/video.min.js"></script>
+<script src="/scripts/http-source-selector.js"></script>
 
                     <script>
-                        var player = videojs('hls-example');
-                        player.play();
-                    </script>
+                      var overrideNative = false;
+                      let player = videojs('hls-example',{
+                      html5: {
+                        vhs: {
+                          overrideNative: overrideNative
+                        },
+                        nativeVideoTracks: !overrideNative,
+                        nativeAudioTracks: !overrideNative,
+                        nativeTextTracks: !overrideNative
+                      }
+                    });
+                      player.play();
+                  </script>
     <%- include('./partials/footer') %>

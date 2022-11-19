@@ -2,7 +2,7 @@ const db = require("../config/db.config")
 
 exports.renderHome = (req,res,next) =>{
     try {
-        db.query("select category from tv;select channel_name,slug,thumbnails,category,paid from tv;select ad_link,ad_image from ad limit 10;select channel_name,slug,thumbnails,category,paid from tv where featured='on' limit 10",(e,data)=>{
+        db.query("select category from tv;select channel_name,slug,thumbnails,category,paid,youtube from tv;select ad_link,ad_image from ad limit 10;select channel_name,slug,thumbnails,category,paid from tv where featured='on' limit 10",(e,data)=>{
             if(e){
                 next(e)
             }else{

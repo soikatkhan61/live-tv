@@ -25,12 +25,25 @@
                     </div>
                 </div>
                 <div class="col-sm-12 col-md-8 col-lg-6 d-flex justify-content-center align-items-center">
-                    <!-- HTML -->
-                    <video id='hls-example' class="video-js vjs-default-skin" width="650"
-                        style="min-height: 500px!important;width: 100%!important;" controls>
+                    <% if(single_tv[0].youtube == 'on'){ %> 
+                     <%- single_tv[0].youtube_link %> 
+                    <% }else{ %> 
+                    <video-js id='hls-example' class="video-js vjs-big-play-centered vjs-theme-fantasy" width="650"
+                        style="min-height: 500px!important;width: 100%!important;" controls data-setup='{"html5": {"vhs": 
+                        {"overrideNative": true}, "nativeAudioTracks": false, "nativeVideoTracks": false}}'>
                         <source type="application/x-mpegURL" src="<%= single_tv[0].link %>">
-                    </video>
+                        <p class="vjs-no-js">
+                          To view this video please enable JavaScript, and consider upgrading to a
+                          web browser that
+                          <a href="https://videojs.com/html5-video-support/" target="_blank"
+                            >supports HTML5 video</a
+                          >
+                        </p>
+                    </video-js>
+                    <% } %> 
                 </div>
+
+                
                 <div class="col-sm-12 col-md-4 col-lg-3 border p-2 d-none d-lg-block">
                     <div class="ad">
                         <p class="text-center pb-0 mt-1 fw-bold">Sponsored</p>
@@ -55,40 +68,37 @@
             </div>
 
             <div>
-              <h5>TV Channel</h5>
-
               <div class="row">
-                  <% if(tv.length == 0){ %> 
-                      <p>No TV Channel</p>
-                  <% }else{ %> 
-                      <% for(let t of tv){ %> 
-                        <div class="col-4 col-md-3 col-lg-2">
-                          <div class="content-grid-block">
-                            <div class="content-item-container">
-                              <div class="item">
-                                  <a href="/live-tv/<%= t.slug %> ">
-                                      <div class="image-wrapper">
-                                        <div class="content-badge live-tv">
-                                          <span class="prime <%= t.paid == 'Free' ? 'd-none' : '' %>">prime</span>
-                                        </div>
+                <% if(featured.length > 0){ %> 
+                  <h5>Featured Channel</h5>
+                    <% for(let t of featured){ %> 
+                      <div class="col-4 col-md-3 col-lg-2">
+                        <div class="content-grid-block">
+                          <div class="content-item-container">
+                            <div class="item">
+                                <a href="/live-tv/<%= t.slug %> ">
+                                    <div class="image-wrapper">
+                                      <div class="content-badge live-tv">
+                                        <span class="prime <%= t.paid == 'Free' ? 'd-none' : '' %>"  >prime</span>
+                                      </div>
 
-                                        <div class="image-block">
-                                          <img src="<%= t.thumbnails ? t.thumbnails : '/images/no_prev.jpg' %> " class="img-responsive b-lazy img-livetv b-loaded" alt="">
-                                        </div>
+                                      <div class="image-block">
+                                        <img src="<%= t.thumbnails ? t.thumbnails : '/images/no_prev.jpg' %> " class="img-responsive b-lazy img-livetv b-loaded" alt="">
                                       </div>
-      
-                                      <div class="channel-title-block mt-2">
-                                          <h5 class="content-title single-line-clamp text-dark"><%= t.channel_name %> </h5>
-                                      </div>
-                                  </a>
-                              </div>
-                          </div>
-                           </div>
+                                    </div>
+    
+                                    <div class="channel-title-block mt-2">
+                                        <h5 class="content-title single-line-clamp text-dark"><%= t.channel_name %> </h5>
+                                    </div>
+                                </a>
+                            </div>
                         </div>
-                        
-                      <% } %> 
-                  <% } %> 
-              </div>
+                         </div>
+                      </div>
+                      
+                    <% } %> 
+                <% } %> 
+            </div>
           </div>
 
           <div class="tv-card mt-3">
@@ -108,7 +118,15 @@
                             <a href="/live-tv/<%= t.slug %> ">
                                 <div class="image-wrapper">
                                   <div class="content-badge live-tv">
-                                    <span class="prime <%= t.paid == 'Free' ? 'd-none' : '' %> ">prime</span>
+                                    <% if(t.paid == 'Free' || t.youtube == 'on'){ %>
+                                      <% if(t.youtube == 'on'){ %>  
+                                        <span class="prime" style="background: green!important;;">Youtube</span>
+                                      <% }else{ %> 
+                                        <span class="prime" >prime</span> 
+                                      <% } %>  
+                                      
+                                    <% } %> 
+                                  
                                   </div>
 
                                   <div class="image-block">
@@ -137,13 +155,14 @@
 
  <!-- JS code -->
                     <!-- If you'd like to support IE8 (for Video.js versions prior to v7) -->
-                    <script src="https://vjs.zencdn.net/ie8/ie8-version/videojs-ie8.min.js"></script>
-                    <script
-                        src="https://cdnjs.cloudflare.com/ajax/libs/videojs-contrib-hls/5.14.1/videojs-contrib-hls.js"></script>
-                    <script src="https://vjs.zencdn.net/7.2.3/video.js"></script>
+ <script src="https://vjs.zencdn.net/ie8/ie8-version/videojs-ie8.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/videojs-contrib-hls/5.14.1/videojs-contrib-hls.js"></script>
+  <script src="https://vjs.zencdn.net/7.20.3/video.min.js"></script>
 
-                    <script>
-                        var player = videojs('hls-example');
-                        player.play();
-                    </script>
+ <script>
+    let player = videojs('hls-example',{
+         autoplay: 'muted'
+      });
+    player.play();
+</script>
     <%- include('../partials/footer') %>
